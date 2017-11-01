@@ -7,9 +7,7 @@ const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, { serveClient: false });
 const controller = require('./chatController.js');
-// const config = require('./config.js')
-const passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+
 
 
 users = [];
@@ -20,38 +18,7 @@ app.use(bodyParser.json());
 app.use(cors());
 // This will serve the content of the build folder so that they are avaiable.
 app.use(express.static('./build'));
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
-
-// massive({
-//   host: 'localhost',
-//   port: 5432,
-//   database: 'brockpettyjohn'
-// }).then (db =>{
-//   app.set('db', db);
-// });
-
-// massive(
-//   config.database
-// ).then (db =>{
-//   app.set('db', db);
-// });
-
-// massive(config.url).then(db => {
-//   app.set('db', db);
 
 
 massive(process.env.DB).then(db => {
@@ -63,11 +30,6 @@ massive(process.env.DB).then(db => {
 
 
 
-app.post('/login',
-  passport.authenticate('local', { successRedirect: '/message_page',
-                                   failureRedirect: '/login',
-                                   failureFlash: true })
-);
 
 app.post('/user', controller.createUser)
 
@@ -83,13 +45,8 @@ app.get('/channels/', controller.getAllChannels)
 
 app.get('/messages/', controller.getAllMessages)
 
-app.post('/user_login/', controller.userLogin)
+app.get('/messages/:id', controller.getMessagesByConvoId)
 
-app.get('/messages/:id', controller.getMessagesByConvoId )
-
-// console.log('\n\n app db >> ', app.set('db'))
-
-// app.use(express.static(__dirname + '/my-app/build'))
 
 // sockets setup 
 
@@ -129,7 +86,7 @@ app.get('/*', (req, res) => {
   // This will send back the index.html file for the react app back whenever we make a request
   // that we haven't explicitly set to return something else. 
   // This is to handle the broswerHistory instead of HashHistory in React
-  res.sendFile(path.join(__dirname,'/build/index.html'));
+  res.sendFile(path.join(__dirname, '/build/index.html'));
 })
 
 server.listen({

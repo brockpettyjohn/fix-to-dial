@@ -21,7 +21,8 @@ class Channels extends Component {
     this.state = {
       showWarning: false, 
       channels: [],
-      newChannel: ''
+      newChannel: '',
+      channelId: 0
     }
     this.handleToggleClick = this.handleToggleClick.bind(this);
     this.createChannel = this.createChannel.bind(this)
@@ -29,7 +30,7 @@ class Channels extends Component {
   }
   componentDidMount(){
     if (!this.state.channels.length){
-      axios.get('https://dry-gorge-21775.herokuapp.com/channels').then(resp =>{
+      axios.get('http://localhost:3030/channels').then(resp =>{
         this.setState({
           channels: resp.data
         })
@@ -48,11 +49,11 @@ class Channels extends Component {
         })
     }
    
-   createChannel(e){
+   createChannel(e, id){
         e.preventDefault()
         axios({
             method: 'post',
-            url: 'https://dry-gorge-21775.herokuapp.com/channels' + id,
+            url: 'https://localhost:3030/channels' + id,
             data: {room_name: this.state.newChannel} // room_name is the what I called it on the b/e and this.state.newChannel is what we want to go into it and its an object
         }).then(res => {
             console.log("Create Channel Response: ", res)
@@ -61,21 +62,23 @@ class Channels extends Component {
         })
     }
 
-    // getMessagesById(e){
-    //   axios.get('http://localhost:3030/messages/:id').then(resp => {
-
-    //   })
-    // }
+    getMessagesById(id){
+      axios.get('http://localhost:3030/messages/' + id).then(resp => {
+        console.log(resp.data)
+      })
+    }
 
     
     render(){
       const channels = this.state.channels.map((channel, i) =>{
         return (
-
-            <Link to ={`/messages/${channel.id}`} style={{textDecoration:'none'}}><div className="channelName" key={i}>
+          <div className='channelName' onClick={() => {this.getMessagesById(channel.id)}}>
+            {channel.room_name}
+          </div>
+            /*<Link to ={`/messages/${channel.id}`} style={{textDecoration:'none'}}><div className="channelName" key={i}>
               {channel.room_name}
             </div>
-            </Link>
+            </Link>*/
         )
       })
         return(
