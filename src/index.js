@@ -11,9 +11,9 @@ import './index.css';
 import { routes } from './router.js';
 
 console.log(routes)
-const routesList = routes.map(route => {
+const routesList = routes.map((route, i) => {
   return (
-    <Route exact={route.exact} path={route.path} component={route.component}></Route>
+    <Route key={i} exact={route.exact} path={route.path} component={route.component}></Route>
   )
 })
 
@@ -22,13 +22,11 @@ const Nothing = () => {
 }
 ReactDOM.render(
   <Provider store={store}>
-    <Router component={App}>
-      <div>
-        <Route exact path="/" component={App}></Route>
-        <Switch>
-          {routesList}
-        </Switch>
-      </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={App} />
+        {routesList}
+      </Switch>
     </Router>
   </Provider>,
   document.getElementById('root')

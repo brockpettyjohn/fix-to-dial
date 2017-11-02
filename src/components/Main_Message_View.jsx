@@ -6,6 +6,7 @@ import HeaderSearchBlock from './Header_Search_Block.jsx';
 import axios from 'axios';
 import io from 'socket.io-client'
 import Slack1 from './../slack-1.svg'
+import { connect } from 'react-redux'
 // import env from '../.env'
 
 const socket = io('http://localhost:3030')
@@ -126,8 +127,9 @@ class MainMessageView extends Component {
   }
 
   render() {
-    //console.log(this.state.messages)
-    const message = this.state.messages.filter(message => message)
+    console.log('messages', this.props)
+    // const message = this.state.messages.filter(message => message)
+    const message = !this.props.messages ? null : this.props.messages.filter(message => message)
 
       .map((message, index) => (
         <div className='message-output' key={index}>
@@ -160,4 +162,11 @@ class MainMessageView extends Component {
   }
 }
 
-export default MainMessageView;
+function mapStateToProps(state) {
+  return {
+   messages: state.messages,
+   channelID: state.id
+  }
+}
+
+export default connect(mapStateToProps)(MainMessageView);

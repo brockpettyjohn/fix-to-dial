@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CreatePrivateChannel from './Create_Private_Channel.jsx'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { getMessagesByChannel } from '../ducks/reducer.js'
+import { connect } from 'react-redux'
 
 function CreateChannelModal(props) {
   if (!props.warn) {
@@ -72,7 +74,7 @@ class Channels extends Component {
     render(){
       const channels = this.state.channels.map((channel, i) =>{
         return (
-          <div className='channelName' onClick={() => {this.getMessagesById(channel.id)}}>
+          <div key={i} className='channelName' onClick={() => {this.props.getMessagesByChannel(channel.id)}}>
             {channel.room_name}
           </div>
             /*<Link to ={`/messages/${channel.id}`} style={{textDecoration:'none'}}><div className="channelName" key={i}>
@@ -97,4 +99,10 @@ class Channels extends Component {
     }
 }
 
-export default Channels
+function mapStateToProps(state) {
+  return {
+   messages: state.messages
+  }
+}
+
+export default connect(mapStateToProps, { getMessagesByChannel })(Channels);
