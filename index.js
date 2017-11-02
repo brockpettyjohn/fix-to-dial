@@ -17,7 +17,7 @@ channels = [];
 app.use(bodyParser.json());
 app.use(cors());
 // This will serve the content of the build folder so that they are avaiable.
-app.use(express.static('./build'));
+// app.use(express.static('./build'));
 
 
 
@@ -82,16 +82,16 @@ io.on('connection', socket => {
 console.log('\n\n env >> ', process.env.HOST)
 
 const path = require('path');
-app.get('/*', (req, res) => {
-  // This will send back the index.html file for the react app back whenever we make a request
-  // that we haven't explicitly set to return something else. 
-  // This is to handle the broswerHistory instead of HashHistory in React
-  res.sendFile(path.join(__dirname, '/build/index.html'));
-})
-
+// app.get('/*', (req, res) => {
+//   // This will send back the index.html file for the react app back whenever we make a request
+//   // that we haven't explicitly set to return something else. 
+//   // This is to handle the broswerHistory instead of HashHistory in React
+//   res.sendFile(path.join(__dirname, '/build/index.html'));
+// })
+const port = 3030
 server.listen({
-  port: process.env.PORT || 3030,
+  port: port,
   // host: process.env.HOST || 'localhost'
 }, () => {
-  console.log(`magic listening on ${process.env.HOST} :: ${process.env.PORT}`)
+  console.log(`magic listening on ${port} :: ${port}`)
 })
