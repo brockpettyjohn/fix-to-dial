@@ -9,10 +9,11 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
+    console.log(action)
     switch (action.type) {
         case GET_MESSAGES_BY_CHANNEL + '_FULFILLED':
-        console.log(action)
-            return Object.assign({}, state, { messages: action.payload, channelID: 2 })
+        console.log(action.payload)
+            return Object.assign({}, state, { messages: action.payload })
 
         default:
             return state
@@ -20,11 +21,14 @@ export default function reducer(state = initialState, action) {
 }
 
 export function getMessagesByChannel(id) {
-    console.log(id)
     const messages = service.getMessagesByChannel(id)
+    // const data = {
+    //     messages: messages,
+    //     channelID: id
+    // }
     return {
         type: GET_MESSAGES_BY_CHANNEL,
-        payload: messages,
-        payload2: id
+        payload: messages
+        // payload: data
     }
 }
