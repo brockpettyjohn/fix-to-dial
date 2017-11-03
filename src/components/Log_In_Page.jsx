@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Slack from './../slack.svg'
-// import SignUpPage from './Sign_Up_Page.jsx'
-// import MainMessageView from './Main_Message_View.jsx'
 
 class LogInPage extends Component {
     constructor(props) {
