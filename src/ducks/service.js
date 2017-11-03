@@ -4,6 +4,7 @@ export const getMessagesByChannel = (id) => {
     
     return axios.get('http://localhost:3030/messages/' + id)
     .then(messagesInChannel => {
+        console.log(messagesInChannel)
         return messagesInChannel.data
       })
 }

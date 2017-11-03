@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_MESSAGES_BY_CHANNEL + '_FULFILLED':
         console.log(action)
-            return Object.assign({}, state, { messages: action.payload, channelID: action.payload2 })
+            return Object.assign({}, state, { messages: action.payload, channelID: 2 })
 
         default:
             return state

@@ -66,65 +66,65 @@ class MainMessageView extends Component {
     socket.emit('chat_message', { message_body: messageText, sender_id: this.state.user, conversation_id: 12 })
   }
 
-  getMessages() {
-    //axios.get('http://localhost:3030/messages') //this is the original working version
-    // const id = (this.props.match.params.id)
-    // console.log(!this.props.match ? )
+  // getMessages() {
+  //   axios.get('http://localhost:3030/messages') //this is the original working version
+  //   const id = (this.props.match.params.id)
+  //   console.log(!this.props.match ? )
 
 
 
-    if (!this.props.match) {
-      axios.get('http://localhost:3030messages')
-        .then(resp => {
-          console.log(resp.data)
-          this.setState({
-            messages: resp.data,
-          })
-          console.log(this.state.messages)
-        })
-        .catch(err => {
-          console.log('why no messages ? ', err.message)
-        })
-    } else {
-      const id = (this.props.match.params.id)
+  //   if (!this.props.match) {
+  //     axios.get('http://localhost:3030messages')
+  //       .then(resp => {
+  //         console.log(resp.data)
+  //         this.setState({
+  //           messages: resp.data,
+  //         })
+  //         console.log(this.state.messages)
+  //       })
+  //       .catch(err => {
+  //         console.log('why no messages ? ', err.message)
+  //       })
+  //   } else {
+  //     const id = (this.props.match.params.id)
 
-      axios.get(`http://localhost:3030messages/${id}`)
-        .then(resp => {
-          console.log(resp.data)
-          this.setState({
-            messages: resp.data,
-          })
-          console.log(this.state.messages)
-        })
-        .catch(err => {
-          console.log('why no messages ? ', err.message)
-        })
-    }
+  //     axios.get(`http://localhost:3030messages/${id}`)
+  //       .then(resp => {
+  //         console.log(resp.data)
+  //         this.setState({
+  //           messages: resp.data,
+  //         })
+  //         console.log(this.state.messages)
+  //       })
+  //       .catch(err => {
+  //         console.log('why no messages ? ', err.message)
+  //       })
+  //   }
 
-    //   .then(resp => {
-    //     console.log(resp.data)
-    //     this.setState({
-    //       messages: resp.data,
-    //     })
-    //     console.log(this.state.messages)
-    //   })
-    //   .catch(err => {
-    //     console.log('why no messages ? ', err.message)
-    //   })
-    // }
+  //     .then(resp => {
+  //       console.log(resp.data)
+  //       this.setState({
+  //         messages: resp.data,
+  //       })
+  //       console.log(this.state.messages)
+  //     })
+  //     .catch(err => {
+  //       console.log('why no messages ? ', err.message)
+  //     })
+  //   }
 
-    // axios.get(`http://localhost:3030/messages/${id}`)
-    //   .then(resp => {
-    //     console.log(resp.data)
-    //     this.setState({
-    //       messages: resp.data,
-    //     })
-    //     console.log(this.state.messages)
-    //   })
-    //   .catch(err => {
-    //     console.log('why no messages ? ', err.message)
-    //   })
-  }
+  //   axios.get(`http://localhost:3030/messages/${id}`)
+  //     .then(resp => {
+  //       console.log(resp.data)
+  //       this.setState({
+  //         messages: resp.data,
+  //       })
+  //       console.log(this.state.messages)
+  //     })
+  //     .catch(err => {
+  //       console.log('why no messages ? ', err.message)
+  //     })
+  // }
 
   render() {
     console.log('messages', this.props)

@@ -12,23 +12,22 @@ class SideBarMenu extends Component {
 
     render() {
         return (
-           
-                 <div className='sidebar-menu'>
-                        <div className='team_id_header'>
-                            <TestModal />
-                            {/*<HeaderSideBar />*/}
-                        </div>
-                    <div className='sidebar-words'>
-                        <ul>
-                            <li>All Unreads</li>
-                            <li>All Threads</li>
-                            <li><h2><Channels /></h2></li>
-                            <li><h2><DirectMessages /></h2></li>
-                        </ul>
-                    </div>
-                        <button className= 'quick-switcher'><QuickSwitcher /></button>
-                 </div>
-          
+
+            <div className='sidebar-menu'>
+                <div className='team_id_header'>
+                    <TestModal />
+                </div>
+                <div className='sidebar-words'>
+                    <ul>
+                        <li>All Unreads</li>
+                        <li>All Threads</li>
+                        <li><h2><Channels /></h2></li>
+                        <li><h2><DirectMessages /></h2></li>
+                    </ul>
+                </div>
+                <button className='quick-switcher'><QuickSwitcher /></button>
+            </div>
+
         )
     }
 }
