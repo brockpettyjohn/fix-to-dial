@@ -1,4 +1,5 @@
 import * as service from './service.js'
+import axios from 'axios'
 
 
 const GET_MESSAGES_BY_CHANNEL = 'GET_MESSAGES_BY_CHANNEL'
@@ -12,8 +13,13 @@ export default function reducer(state = initialState, action) {
     console.log(action)
     switch (action.type) {
         case GET_MESSAGES_BY_CHANNEL + '_FULFILLED':
-        console.log(action.payload)
-            return Object.assign({}, state, { messages: action.payload })
+            return Object.assign({}, state, {messages: action.payload.messages, channelID: action.payload.channelID});
+        case GET_MESSAGES_BY_CHANNEL + '_PENDING':
+            return Object.assign({}, state);
+        case GET_MESSAGES_BY_CHANNEL + '_REJECTED':
+            return Object.assign({}, state)
+        case GET_MESSAGES_BY_CHANNEL:
+            return Object.assign({}, state)
 
         default:
             return state
@@ -21,14 +27,16 @@ export default function reducer(state = initialState, action) {
 }
 
 export function getMessagesByChannel(id) {
-    const messages = service.getMessagesByChannel(id)
-    // const data = {
-    //     messages: messages,
-    //     channelID: id
-    // }
+   const data =  axios.get('http://localhost:3030/messages/' + id)
+    .then(messagesInChannel => {
+        console.log(messagesInChannel)
+        return {
+            messages: messagesInChannel.data,
+            channelID: id
+    }
+      })
     return {
         type: GET_MESSAGES_BY_CHANNEL,
-        payload: messages
-        // payload: data
+        payload: data
     }
 }

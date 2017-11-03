@@ -163,7 +163,7 @@ class MainMessageView extends Component {
 function mapStateToProps(state) {
   return {
    messages: state.messages,
-   channelID: state.id
+   channelID: state.channelID
   }
 }
 
