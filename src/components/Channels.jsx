@@ -51,11 +51,11 @@ class Channels extends Component {
         })
     }
    
-   createChannel(e, id){
+   createChannel(e){
         e.preventDefault()
         axios({
             method: 'post',
-            url: 'https://localhost:3030/channels',
+            url: 'http://localhost:3030/channels',
             data: {room_name: this.state.newChannel} // room_name is the what I called it on the b/e and this.state.newChannel is what we want to go into it and its an object
         }).then(res => {
             console.log("Create Channel Response: ", res)

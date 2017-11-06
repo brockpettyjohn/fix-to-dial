@@ -59,9 +59,7 @@ class MainMessageView extends Component {
   }
   //creatMessage is being passed as prop into AddMessages which is later being used in the Message bar jsx
   createMessage(messageText) {
-    // this.setState( { messages: [...this.state.messages, { text: messageText, complete: false } ] })
-    // console.log(this.props.params.id)
-    socket.emit('chat_message', { message_body: messageText, sender_id: this.state.user, conversation_id: 12 })
+    socket.emit('chat_message', { message_body: messageText, sender_id: this.state.user, conversation_id: this.props.channelID })
   }
 
   getMessages() {
@@ -72,7 +70,7 @@ class MainMessageView extends Component {
 
 
     if (!this.props.match) {
-      axios.get('http://localhost:3030messages')
+      axios.get('http://localhost:3030/messages')
         .then(resp => {
           console.log(resp.data)
           this.setState({
@@ -84,9 +82,9 @@ class MainMessageView extends Component {
           console.log('why no messages ? ', err.message)
         })
     } else {
-      const id = (this.props.match.params.id)
+      const id = this.props.channelID
 
-      axios.get(`http://localhost:3030messages/${id}`)
+      axios.get('http://localhost:3030/messages')
         .then(resp => {
           console.log(resp.data)
           this.setState({
@@ -125,7 +123,7 @@ class MainMessageView extends Component {
   }
 
   render() {
-    console.log('messages', this.props)
+    console.log('messages', this.props.channelID)
     // const message = this.state.messages.filter(message => message)
     const message = !this.props.messages ? null : this.props.messages.filter(message => message)
 
@@ -162,8 +160,8 @@ class MainMessageView extends Component {
 
 function mapStateToProps(state) {
   return {
-   messages: state.messages,
-   channelID: state.channelID
+    messages: state.messages,
+    channelID: state.channelID
   }
 }
 

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { getMessagesByChannel } from '../ducks/reducer.js'
+import { connect } from 'react-redux'
 
  class AddMessage extends Component {
     constructor() {
@@ -14,7 +16,9 @@ import React, { Component } from "react";
 
     handleKeyPress() {
         //the createMessage function from App is being used from the AddMessage component via props
-        this.props.createMessage( this.state.input )//<---is coming from the the state set above in the this.state = { input: ""}
+        this.props.createMessage( this.state.input );//<---is coming from the the state set above in the this.state = { input: ""}
+        this.props.getMessagesByChannel(this.props.channelID)
+    
         this.setState({
             input: ''
         })
@@ -37,11 +41,17 @@ import React, { Component } from "react";
                         }
                     }
                 />
-                {/*<button onKeyPress={ () => this.handleKeyPress() }>Send</button>*/}
                 <i className="fa fa-smile-o" aria-hidden="true"></i>
                 </div>
            
         );
     }
 }
-export default AddMessage;
+function mapStateToProps(state) {
+  return {
+   messages: state.messages,
+   channelID: state.channelID
+  }
+}
+
+export default connect(mapStateToProps, { getMessagesByChannel })(AddMessage);

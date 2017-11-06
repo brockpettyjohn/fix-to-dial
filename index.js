@@ -41,7 +41,7 @@ app.post('/channels', controller.createChannel)
 
 app.get('/channels/:id', controller.getChannel)
 
-app.get('/channels/', controller.getAllChannels)
+app.get('/channels', controller.getAllChannels)
 
 app.get('/messages/', controller.getAllMessages)
 
