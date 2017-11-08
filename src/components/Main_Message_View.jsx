@@ -41,6 +41,7 @@ class MainMessageView extends Component {
       console.log('this error happened', data)
     })
   }
+
   handleUserConnected() {
     socket.on('user_connected', data => {
       console.log('this user connected', data)
@@ -48,7 +49,6 @@ class MainMessageView extends Component {
   }
 
   handleChatMessage() {
-
     socket.on('chat_message', data => {
       console.log('fired', data)
       const messages = this.state.messages.concat([data])
@@ -63,12 +63,6 @@ class MainMessageView extends Component {
   }
 
   getMessages() {
-    //axios.get('http://localhost:3030/messages') //this is the original working version
-    // const id = (this.props.match.params.id)
-    // console.log(!this.props.match ? )
-
-
-
     if (!this.props.match) {
       axios.get('http://localhost:3030/messages')
         .then(resp => {
@@ -82,7 +76,7 @@ class MainMessageView extends Component {
           console.log('why no messages ? ', err.message)
         })
     } else {
-      const id = this.props.channelID
+      // const id = this.props.channelID
 
       axios.get('http://localhost:3030/messages')
         .then(resp => {
@@ -96,41 +90,16 @@ class MainMessageView extends Component {
           console.log('why no messages ? ', err.message)
         })
     }
-
-    //   .then(resp => {
-    //     console.log(resp.data)
-    //     this.setState({
-    //       messages: resp.data,
-    //     })
-    //     console.log(this.state.messages)
-    //   })
-    //   .catch(err => {
-    //     console.log('why no messages ? ', err.message)
-    //   })
-    // }
-
-    // axios.get(`http://localhost:3030/messages/${id}`)
-    //   .then(resp => {
-    //     console.log(resp.data)
-    //     this.setState({
-    //       messages: resp.data,
-    //     })
-    //     console.log(this.state.messages)
-    //   })
-    //   .catch(err => {
-    //     console.log('why no messages ? ', err.message)
-    //   })
   }
 
   render() {
-    console.log('messages', this.props.channelID)
     // const message = this.state.messages.filter(message => message)
     const message = !this.props.messages ? null : this.props.messages.filter(message => message)
 
       .map((message, index) => (
         <div className='message-output' key={index}>
           <div className='message-image'>
-            <img src={Slack1} />
+            <img alt="" src={Slack1} />
           </div>
           <div className='message-words'>
             <div id='sender'>{message.sender_id}</div>

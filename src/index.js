@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './ducks/store.js';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 import './normalize.css';
 import './index.css';
@@ -17,9 +17,9 @@ const routesList = routes.map((route, i) => {
   )
 })
 
-const Nothing = () => {
-  return <h1>SHITS BROKE</h1>
-}
+// const Nothing = () => {
+//   return <h1>SHITS BROKE</h1>
+// }
 ReactDOM.render(
   <Provider store={store}>
     <Router component={App}>

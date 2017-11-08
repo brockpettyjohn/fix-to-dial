@@ -1,4 +1,4 @@
-import * as service from './service.js'
+// import * as service from './service.js'
 import axios from 'axios'
 
 
@@ -6,7 +6,8 @@ const GET_MESSAGES_BY_CHANNEL = 'GET_MESSAGES_BY_CHANNEL'
 
 const initialState = {
     messages: [],
-    channelID: 0
+    channelID: 0,
+    channels: []
 }
 
 export default function reducer(state = initialState, action) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CreatePrivateChannel from './Create_Private_Channel.jsx'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { getMessagesByChannel } from '../ducks/reducer.js'
 import { connect } from 'react-redux'
 
