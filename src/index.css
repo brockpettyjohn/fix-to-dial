@@ -191,7 +191,6 @@ h2{
 .main-message-view{
   height: 100vh;
   width: calc(100vw - 221px);
-  border: solid black 1px;
   overflow-y: hidden;
   display: flex;
   width: calc(100vw - 237px);

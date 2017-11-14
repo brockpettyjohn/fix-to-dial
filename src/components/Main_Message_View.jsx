@@ -8,6 +8,7 @@ import io from 'socket.io-client'
 import Slack1 from './../slack-1.svg'
 import { connect } from 'react-redux'
 import { scrollToElement } from 'scroll-to-element'
+import ReactDOM from 'react-dom'
 // import env from '../.env'
 
 const socket = io('http://localhost:3030')
@@ -27,8 +28,9 @@ class MainMessageView extends Component {
 
   componentDidMount() {
     if (!this.state.user) {
-      const input = prompt('sockets are working')
-      const user = (input)
+      // const input = prompt('sockets are working')
+      // const user = (input)
+      const user = "Brock Pettyjohn"
       this.setState({
         user
       })
@@ -63,9 +65,11 @@ class MainMessageView extends Component {
     socket.emit('chat_message', { message_body: messageText, sender_id: this.state.user, conversation_id: this.props.channelID })
   }
 
-   scrollToBottom(){
-        scrollToElement('scrollToHere')
-    }
+  scrollToBottom() {
+    var myDiv = document.getElementById("test");
+    myDiv.scrollTop = myDiv.scrollHeight;
+
+  }
 
   getMessages() {
     if (!this.props.match) {
@@ -81,8 +85,6 @@ class MainMessageView extends Component {
           console.log('why no messages ? ', err.message)
         })
     } else {
-      // const id = this.props.channelID
-
       axios.get('http://localhost:3030/messages')
         .then(resp => {
           console.log(resp.data)
@@ -97,16 +99,13 @@ class MainMessageView extends Component {
     }
   }
 
-  
+
 
   render() {
-    console.log(this.refs)
     // const message = this.state.messages.filter(message => message)
     const message = !this.props.messages ? null : this.props.messages.filter(message => message)
-
       .map((message, index) => (
-        <div  className='message-output' key={index}>
-          <button onClick={() => {this.scrollToBottom()}}>test</button>
+        <div className='message-output' key={index}>
           <div className='message-image'>
             <img alt="" src={Slack1} />
           </div>
@@ -128,7 +127,6 @@ class MainMessageView extends Component {
         <div id='incoming-messages'>
           {message}
         </div>
-        <div id='scrollToHere'></div>
 
 
         <div className='message-footer'>
