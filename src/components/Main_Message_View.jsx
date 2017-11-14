@@ -7,6 +7,7 @@ import axios from 'axios';
 import io from 'socket.io-client'
 import Slack1 from './../slack-1.svg'
 import { connect } from 'react-redux'
+import { scrollToElement } from 'scroll-to-element'
 // import env from '../.env'
 
 const socket = io('http://localhost:3030')
@@ -62,6 +63,10 @@ class MainMessageView extends Component {
     socket.emit('chat_message', { message_body: messageText, sender_id: this.state.user, conversation_id: this.props.channelID })
   }
 
+   scrollToBottom(){
+        scrollToElement('scrollToHere')
+    }
+
   getMessages() {
     if (!this.props.match) {
       axios.get('http://localhost:3030/messages')
@@ -92,12 +97,16 @@ class MainMessageView extends Component {
     }
   }
 
+  
+
   render() {
+    console.log(this.refs)
     // const message = this.state.messages.filter(message => message)
     const message = !this.props.messages ? null : this.props.messages.filter(message => message)
 
       .map((message, index) => (
-        <div className='message-output' key={index}>
+        <div  className='message-output' key={index}>
+          <button onClick={() => {this.scrollToBottom()}}>test</button>
           <div className='message-image'>
             <img alt="" src={Slack1} />
           </div>
@@ -116,9 +125,12 @@ class MainMessageView extends Component {
           <HeaderSearchBlock />
         </div>
         <MessageDisplay />
-        <div className='incoming-messages'>
+        <div id='incoming-messages'>
           {message}
         </div>
+        <div id='scrollToHere'></div>
+
+
         <div className='message-footer'>
           <AddMessage createMessage={this.createMessage} />
         </div>

@@ -47,8 +47,6 @@ module.exports = {
                 res.send(err.message)
             })
         // then if it exist 
-
-
     },
 
     update: (req, res) => {

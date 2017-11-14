@@ -281,7 +281,7 @@ color: white;
   
 }
 
-.incoming-messages{
+#incoming-messages{
   padding-bottom: 60px;
   width: 88vw;
   overflow-y: scroll;

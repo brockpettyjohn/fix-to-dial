@@ -76,10 +76,6 @@ class Channels extends Component {
           <div key={i} className='channelName' onClick={() => {this.props.getMessagesByChannel(channel.id)}}>
             {channel.room_name}
           </div>
-            /*<Link to ={`/messages/${channel.id}`} style={{textDecoration:'none'}}><div className="channelName" key={i}>
-              {channel.room_name}
-            </div>
-            </Link>*/
         )
       })
         return(

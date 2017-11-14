@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getMessagesByChannel } from '../ducks/reducer.js'
 import { connect } from 'react-redux'
+import scrollToComponent from 'react-scroll-to-component'
 
  class AddMessage extends Component {
     constructor() {
@@ -8,6 +9,10 @@ import { connect } from 'react-redux'
 
         this.state = { input: "" }
         this.handleKeyPress = this.handleKeyPress.bind(this)
+    }
+
+    scrollToBottom(){
+        scrollToComponent(this.refs.messages)
     }
 
     handleInputChange( event ) {
@@ -25,9 +30,7 @@ import { connect } from 'react-redux'
     }
 
     render() {
-        console.log( this.props );
         return (
-            
             <div className='add-message'>
                 <i className="fa fa-plus" aria-hidden="true"></i>
                 <input className='message-input'
